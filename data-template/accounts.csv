@@ -1,0 +1,3 @@
+name,host,port,username,password,ssl,source_folder,spam_folder
+Example User,imap.example.com,993,vorname.nachname@example.com,,true,INBOX,Spamverdacht
+Example User,imap.example.com,993,vorname.nachname@example.com,,true,Security,Spamverdacht
