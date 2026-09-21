@@ -1,0 +1,24 @@
+services:
+  imapfilter:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: imapfilter
+    restart: unless-stopped
+    environment:
+      IMAPFILTER_INTERVAL: ${IMAPFILTER_INTERVAL:-300}
+    volumes:
+      - ./config:/etc/imapfilter:ro
+      - ./data:/var/lib/imapfilter
+    command: ["loop"]
+
+  imapfilter-once:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: imapfilter-once
+    restart: "no"
+    volumes:
+      - ./config:/etc/imapfilter:ro
+      - ./data:/var/lib/imapfilter
+    command: ["once"]
