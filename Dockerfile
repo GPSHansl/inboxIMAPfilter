@@ -7,6 +7,7 @@ RUN apt-get update \
         git \
         lua5.3 \
         liblua5.3-dev \
+        libpcre2-dev \
         libssl-dev \
         libpam0g-dev \
     && rm -rf /var/lib/apt/lists/*
@@ -16,8 +17,8 @@ RUN git clone --depth 1 https://github.com/lefcha/imapfilter.git /tmp/imapfilter
 
 WORKDIR /tmp/imapfilter
 ENV CPPFLAGS="-I/usr/include/lua5.3"
-RUN make -j"$(nproc)" \
-    && make install
+RUN make LIBLUA=-llua5.3 -j"$(nproc)" \
+    && make LIBLUA=-llua5.3 install
 
 RUN mkdir -p /etc/imapfilter /var/lib/imapfilter \
     && chmod 755 /usr/local/bin/imapfilter
