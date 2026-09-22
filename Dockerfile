@@ -15,6 +15,7 @@ WORKDIR /tmp
 RUN git clone --depth 1 https://github.com/lefcha/imapfilter.git /tmp/imapfilter
 
 WORKDIR /tmp/imapfilter
+ENV CPPFLAGS="-I/usr/include/lua5.3"
 RUN make -j"$(nproc)" \
     && make install
 
