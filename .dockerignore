@@ -1,0 +1,7 @@
+config/
+data/
+.git/
+.github/
+.gitignore
+README.md
+docker-compose.yml
