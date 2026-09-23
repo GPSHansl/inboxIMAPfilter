@@ -9,7 +9,6 @@ services:
       IMAPFILTER_INTERVAL: ${IMAPFILTER_INTERVAL:-300}
     volumes:
       - ./config:/etc/imapfilter
-      - ./data:/var/lib/imapfilter/data
     command: ["loop"]
 
   imapfilter-once:
@@ -20,5 +19,4 @@ services:
     restart: "no"
     volumes:
       - ./config:/etc/imapfilter
-      - ./data:/var/lib/imapfilter/data
     command: ["once"]
