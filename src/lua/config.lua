@@ -1,4 +1,4 @@
--- imapfilter configuration derived from IMAPAntiKABot/myantibot/config.json
+-- imapfilter configuration
 -- Rules:
 -- 1. Ignore all senders matching @example.com.
 -- 2. Match suspicious bot senders like first_last12345@example.net / example.org.

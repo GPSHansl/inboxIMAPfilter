@@ -1,6 +1,6 @@
-# imapfilter für IMAPAntiKABot
+# imapfilter
 
-Dieses Verzeichnis enthält ein separates imapfilter-Setup, das auf die Regeln aus IMAPAntiKABot/myantibot/config.json abgestimmt ist.
+Dieses Verzeichnis enthält ein separates imapfilter-Setup für IMAP-Filterregeln mit konfigurierbaren Whitelist- und Suspicious-Patterns.
 
 ## Projektstruktur
 
@@ -51,5 +51,5 @@ Die Konfiguration akzeptiert auch noch das ältere Format mit `mailboxes` als CS
 
 - Das Poll-Interval bleibt in der Umgebung, z. B. `IMAPFILTER_INTERVAL=300`.
 - Die Filterlogik ist bewusst konservativ: sie verschiebt nur eindeutige Bot-Sender-Muster und lässt `@example.com` auf jeden Fall frei.
-- Die IMAP- und Mailbox-Einstellungen wurden aus IMAPAntiKABot/myantibot/config.json übernommen.
+- Die IMAP- und Mailbox-Einstellungen müssen auf die jeweilige Ziel-Umgebung angepasst werden.
 - Für die Produktion sollte der IMAP-Filter auf eine echte IMAP-Umgebung mit passender Benutzer- und Spam-Ordner-Konfiguration angepasst werden.
