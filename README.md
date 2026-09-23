@@ -2,6 +2,13 @@
 
 Dieses Verzeichnis enthält ein separates imapfilter-Setup, das auf die Regeln aus IMAPAntiKABot/myantibot/config.json abgestimmt ist.
 
+## Projektstruktur
+
+- `src/lua/` enthält die Lua-Quellen
+- `src/config-template/` enthält die Template-Dateien, die beim Start in `/etc/imapfilter` kopiert werden, falls dort noch keine Dateien existieren
+- `config/` bleibt lokal und wird nicht in Git verfolgt
+- `data/` enthält die Laufzeitdaten des Containers
+
 ## Übernommene Regeln
 
 - Whitelist: alle Adressen mit `@example.com` werden ignoriert.
@@ -27,7 +34,7 @@ docker compose logs -f
 
 ## CSV-Format für Accounts
 
-Die IMAP-Accounts werden aus `config/accounts.csv` gelesen. Für eine einfachere Lua-Logik ist es klarer, pro Ordner eine Zeile zu definieren:
+Die IMAP-Accounts werden aus `/etc/imapfilter/accounts.csv` gelesen. Für eine einfachere Lua-Logik ist es klarer, pro Ordner eine Zeile zu definieren:
 
 ```csv
 name,host,port,username,password,ssl,mailbox,spam_folder
@@ -36,7 +43,7 @@ Example User,imap.example.com,993,vorname.nachname@example.com,REPLACE_ME,true,S
 My Example,imap.example.com,993,me@example.com,REPLACE_ME,true,INBOX,Spam
 ```
 
-Die Datei liegt im Verzeichnis `config/`, wird also über das Compose-Volume auf `/etc/imapfilter/accounts.csv` eingebunden.
+Die Datei wird über das Compose-Volume auf `/etc/imapfilter/accounts.csv` eingebunden. Wenn das Volume noch leer ist, initialisiert der Entrypoint die Dateien aus `src/config-template/` automatisch.
 
 Die Konfiguration akzeptiert auch noch das ältere Format mit `mailboxes` als CSV-Liste, aber der Eintrag pro Ordner ist deutlich einfacher und robuster.
 

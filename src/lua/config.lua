@@ -5,6 +5,8 @@
 -- 3. Move only unseen suspicious messages to the configured spam folder.
 -- 4. Read accounts from accounts.csv. One row per account, one mailbox per account.
 
+package.path = '/var/lib/imapfilter/src/lua/?.lua;' .. package.path
+
 options.timeout = 120
 options.create = true
 
@@ -20,7 +22,9 @@ local function process_account(cfg)
   local port = tonumber(cfg.port or '993') or 993
   local username = cfg.username or ''
   local password = cfg.password or ''
-  local ssl_value = cfg.ssl or 'true'
+  local ssl_value = tostring(cfg.ssl or 'true')
+  local ssl_enabled = (ssl_value:lower() == 'true') or (ssl_value == '1') or (ssl_value:lower() == 'yes')
+  local ssl_setting = ssl_enabled and 'tls1.2' or nil
   local source_folder = cfg.source_folder or cfg.mailbox or cfg.mailboxes or ''
   local spam_folder = cfg.spam_folder or ''
   local name = cfg.name or (username ~= '' and host ~= '' and (username .. '|' .. host .. ':' .. tostring(port)) or 'imap-account')
@@ -45,7 +49,7 @@ local function process_account(cfg)
     port = port,
     username = username,
     password = password,
-    ssl = (ssl_value:lower() == 'true') or (ssl_value == '1') or (ssl_value == 'yes'),
+    ssl = ssl_setting,
   }
 
   if account[spam_folder] == nil then

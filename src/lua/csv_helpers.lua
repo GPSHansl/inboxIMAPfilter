@@ -36,7 +36,8 @@ local function load_csv_rows(path)
 
   local rows = {}
   for line in fh:lines() do
-    if line:match('%S') then
+    local trimmed = trim(line)
+    if trimmed ~= '' and not trimmed:match('^#') then
       table.insert(rows, line)
     end
   end

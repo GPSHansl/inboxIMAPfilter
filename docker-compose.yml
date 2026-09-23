@@ -8,8 +8,8 @@ services:
     environment:
       IMAPFILTER_INTERVAL: ${IMAPFILTER_INTERVAL:-300}
     volumes:
-      - ./config:/etc/imapfilter:ro
-      - ./data:/var/lib/imapfilter
+      - ./config:/etc/imapfilter
+      - ./data:/var/lib/imapfilter/data
     command: ["loop"]
 
   imapfilter-once:
@@ -19,6 +19,6 @@ services:
     container_name: imapfilter-once
     restart: "no"
     volumes:
-      - ./config:/etc/imapfilter:ro
-      - ./data:/var/lib/imapfilter
+      - ./config:/etc/imapfilter
+      - ./data:/var/lib/imapfilter/data
     command: ["once"]

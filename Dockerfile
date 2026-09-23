@@ -20,13 +20,15 @@ ENV CPPFLAGS="-I/usr/include/lua5.3"
 RUN make LIBLUA=-llua5.3 -j"$(nproc)" \
     && make LIBLUA=-llua5.3 install
 
-RUN mkdir -p /etc/imapfilter /var/lib/imapfilter \
+RUN mkdir -p /etc/imapfilter /var/lib/imapfilter /var/lib/imapfilter/config-template \
     && chmod 755 /usr/local/bin/imapfilter
 
-COPY entrypoint.sh /usr/local/bin/imapfilter-entrypoint.sh
+COPY src/lua/*.lua /var/lib/imapfilter/
+COPY src/config-template /var/lib/imapfilter/config-template/
+COPY src/imapfilter-entrypoint.sh /usr/local/bin/imapfilter-entrypoint.sh
 RUN chmod +x /usr/local/bin/imapfilter-entrypoint.sh
 
-WORKDIR /etc/imapfilter
+WORKDIR /var/lib/imapfilter
 
 ENTRYPOINT ["/usr/local/bin/imapfilter-entrypoint.sh"]
 CMD ["loop"]
