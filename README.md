@@ -18,19 +18,22 @@ Dieses Verzeichnis enthält ein separates imapfilter-Setup für IMAP-Filterregel
 
 ## Einrichtung
 
-1. Lege unter `config/accounts.csv` die IMAP-Accounts an.
-2. Setze nur noch das Intervall in `.env` oder direkt im Compose-Environment.
-3. Starten Sie den Container:
+1. Bereite ein lokales Volume für die CSV-Dateien vor. Die IMAP-Konfigurationen liegen in `/etc/imapfilter` und werden über ein Volume eingebunden.
+2. Lege unter `config/accounts.csv` die IMAP-Accounts an.
+3. Setze nur noch das Intervall in `.env` oder direkt im Compose-Environment.
+4. Starten Sie den Container:
 
 ```bash
 docker compose up -d --build
 ```
 
-4. Logs ansehen:
+5. Logs ansehen:
 
 ```bash
 docker compose logs -f
 ```
+
+> Wichtig: Die CSV-Dateien dürfen nicht im Docker-Image fest verdrahtet sein. Sie müssen über ein Volume nach `/etc/imapfilter` eingebunden werden.
 
 ## CSV-Format für Accounts
 
