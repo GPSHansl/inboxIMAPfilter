@@ -5,7 +5,7 @@
 -- 3. Move only unseen suspicious messages to the configured spam folder.
 -- 4. Read accounts from accounts.csv. One row per account, one mailbox per account.
 
-package.path = '/var/lib/imapfilter/src/lua/?.lua;' .. package.path
+package.path = '/var/lib/imapfilter/?.lua;' .. package.path
 
 options.timeout = 120
 options.create = true
